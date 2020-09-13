@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  selector:
+    app: ftloc
+    tier: frontend
+  ports:
+  - protocol: TCP
+    port: 8000
+    targetPort: 8000
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      app: ftloc
+      tier: frontend
+      track: stable
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ftloc
+        tier: frontend
+        track: stable
+    spec:
+      containers:
+        - name: frontend-ftloc
+          image: ftloc-frontend:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000

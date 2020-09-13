@@ -5,6 +5,10 @@ app.set('view engine', 'pug')
 var request = require('request')
 
 
+app.get('/test', (req,res) => {
+    res.send("Hello frontend")
+})
+
 
 app.get('/', (req,res) => {
     getArticles().then((articles) => {
@@ -32,7 +36,7 @@ app.get('/request', (req,res) => {
 */
 function getArticles(){
     return new Promise((resolve, reject) => {
-        request('http://backend-api:8001/api/articles', {json:true}, (err,res,body) => {
+        request('http://backend:8001/api/articles', {json:true}, (err,res,body) => {
             if(err){
                 return reject(err)
             }

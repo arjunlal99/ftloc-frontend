@@ -23,4 +23,4 @@ ADD views/ /usr/src/frontend/views/
 
 EXPOSE 8000
 
-RUN nohup node index.js &
+CMD ["node", "index.js"]
